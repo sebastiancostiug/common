@@ -1,0 +1,23 @@
+{
+    "name": "sebastiancostiug/common",
+    "description": "A collection of commonly used classes",
+    "authors": [
+        {
+            "name": "Sebastian Costiug",
+            "email": "sebastian@overbyte.dev",
+            "homepage": "https://overbyte.dev"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "version": "0.0.1",
+    "license": "BSD-3-Clause",
+    "type": "classes",
+    "keywords": [
+        "common",
+        "php"
+    ],
+    "require": {
+        "php": "^8.2"
+    }
+}
