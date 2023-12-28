@@ -1,6 +1,6 @@
-# Database
+# Common
 
-### A database interaction module based on PDO
+### A collection of commonly used classes
 
 ---
 
@@ -20,4 +20,4 @@ I recomend forking it because it's purpose is for personal use and I will only m
 
 ---
 
-It contains Database interaction methods, an ActiveRecord class and a Migration class, it also contains a migration template to be used to generate migrations via console commands and a RecordInterface to be used with models.
+It contains a Singleton trait and a Collectioon class similar to Laravel collection
