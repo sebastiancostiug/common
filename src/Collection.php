@@ -15,7 +15,7 @@
  *
  */
 
-namespace seb\common;
+namespace common;
 
 /**
  * Represents a collection of items.

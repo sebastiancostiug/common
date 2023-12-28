@@ -16,7 +16,7 @@
  *
  */
 
-namespace seb\common;
+namespace common;
 
 /**
  * Trait Singleton
