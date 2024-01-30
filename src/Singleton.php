@@ -19,7 +19,6 @@
 namespace common;
 
 /**
- * Trait Singleton
  * Implements the Singleton design pattern, allowing only one instance of a class to be created.
  */
 trait Singleton

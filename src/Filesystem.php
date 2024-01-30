@@ -19,7 +19,7 @@
 namespace common;
 
 /**
- * FileSystem class
+ * Represents a file system component.
  */
 class Filesystem
 {
