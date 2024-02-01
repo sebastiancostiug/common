@@ -44,6 +44,7 @@ class Filesystem
      * Check if a file or directory exists.
      *
      * @param string $path The path to the file or directory.
+     *
      * @return boolean Returns true if the file or directory exists, false otherwise.
      */
     public function exists($path)
@@ -55,6 +56,7 @@ class Filesystem
      * Retrieves the contents of a file.
      *
      * @param string $path The path to the file.
+     *
      * @return string|false The contents of the file, or false on failure.
      */
     public function get($path)
@@ -67,6 +69,7 @@ class Filesystem
      *
      * @param string $path     The path of the file.
      * @param string $contents The contents to be written to the file.
+     *
      * @return integer|false The number of bytes written to the file, or false on failure.
      */
     public function put($path, $contents)
@@ -82,6 +85,7 @@ class Filesystem
      *
      * @param string $path The path to the file.
      * @param string $data The data to prepend to the file.
+     *
      * @return boolean|integer The number of bytes written to the file, or false on failure.
      */
     public function prepend($path, $data)
@@ -101,6 +105,7 @@ class Filesystem
      *
      * @param string $path The path to the file.
      * @param string $data The data to append to the file.
+     *
      * @return boolean True on success, false on failure.
      */
     public function append($path, $data)
@@ -117,6 +122,7 @@ class Filesystem
      *
      * @param string  $path The path to the file or directory.
      * @param integer $mode The new permissions to set. Default is 0777.
+     *
      * @return boolean Returns true on success, false on failure.
      */
     public function chmod($path, $mode = 0777)
@@ -129,6 +135,7 @@ class Filesystem
      *
      * @param string $path The path to the file or directory.
      * @param string $user The new owner of the file or directory.
+     *
      * @return boolean Returns true on success, false on failure.
      */
     public function chown($path, $user)
@@ -141,6 +148,7 @@ class Filesystem
      *
      * @param string $path  The path to the file or directory.
      * @param string $group The new group.
+     *
      * @return boolean Returns true on success, false on failure.
      */
     public function chgrp($path, $group)
@@ -153,6 +161,7 @@ class Filesystem
      *
      * @param string $path   The path of the file to be copied.
      * @param string $target The target path where the file will be copied to.
+     *
      * @return boolean Returns true on success, false on failure.
      */
     public function copy($path, $target)
@@ -165,6 +174,7 @@ class Filesystem
      *
      * @param string $path   The path of the file or directory to be moved.
      * @param string $target The target path where the file or directory should be moved to.
+     *
      * @return boolean Returns true on success, false on failure.
      */
     public function move($path, $target)
@@ -176,6 +186,7 @@ class Filesystem
      * Deletes a file or directory.
      *
      * @param string $path The path to the file or directory to be deleted.
+     *
      * @return boolean Returns true on success, false on failure.
      */
     public function delete($path)
@@ -189,6 +200,7 @@ class Filesystem
      * @param string  $path      The path to the directory to be created.
      * @param integer $mode      The mode of the directory to be created.
      * @param boolean $recursive Allows the creation of nested directories specified in the path.
+     *
      * @return boolean Returns true on success, false on failure.
      */
     public function makeDirectory($path, $mode = 0777, $recursive = false)
@@ -200,6 +212,7 @@ class Filesystem
      * Removes a directory.
      *
      * @param string $path The path to the directory to be removed.
+     *
      * @return boolean Returns true on success, false on failure.
      */
     public function removeDirectory($path)
@@ -211,6 +224,7 @@ class Filesystem
      * Returns the size of a file or directory.
      *
      * @param string $path The path to the file or directory.
+     *
      * @return integer|false The size of the file or directory, or false on failure.
      */
     public function size($path)
@@ -222,6 +236,7 @@ class Filesystem
      * Returns the last modified time of a file or directory.
      *
      * @param string $path The path to the file or directory.
+     *
      * @return integer|false The last modified time of the file or directory, or false on failure.
      */
     public function lastModified($path)
@@ -233,6 +248,7 @@ class Filesystem
      * Returns the file type of a file or directory.
      *
      * @param string $path The path to the file or directory.
+     *
      * @return string|false The file type of the file or directory, or false on failure.
      */
     public function type($path)
@@ -244,6 +260,7 @@ class Filesystem
      * Returns the mime type of a file.
      *
      * @param string $path The path to the file.
+     *
      * @return string|false The mime type of the file, or false on failure.
      */
     public function mimeType($path)
@@ -255,6 +272,7 @@ class Filesystem
      * Returns the file extension of a file.
      *
      * @param string $path The path to the file.
+     *
      * @return string|false The file extension of the file, or false on failure.
      */
     public function extension($path)
@@ -266,6 +284,7 @@ class Filesystem
      * Returns the file name of a file.
      *
      * @param string $path The path to the file.
+     *
      * @return string|false The file name of the file, or false on failure.
      */
     public function name($path)
@@ -277,6 +296,7 @@ class Filesystem
      * Returns the file name of a file.
      *
      * @param string $path The path to the file.
+     *
      * @return string|false The file name of the file, or false on failure.
      */
     public function basename($path)
@@ -288,6 +308,7 @@ class Filesystem
      * Checks if a file or directory is readable.
      *
      * @param string $path The path to the file or directory.
+     *
      * @return boolean Returns true if the file or directory is readable, false otherwise.
      */
     public function isReadable($path)
@@ -299,6 +320,7 @@ class Filesystem
      * Checks if a file or directory is writable.
      *
      * @param string $path The path to the file or directory.
+     *
      * @return boolean Returns true if the file or directory is writable, false otherwise.
      */
     public function isWritable($path)
@@ -310,6 +332,7 @@ class Filesystem
      * Checks if a file or directory is executable.
      *
      * @param string $path The path to the file or directory.
+     *
      * @return boolean Returns true if the file or directory is executable, false otherwise.
      */
     public function isExecutable($path)
@@ -322,6 +345,7 @@ class Filesystem
      *
      * @param string  $pattern The pattern to search for.
      * @param integer $flags   Optional flags to modify the behavior of the globbing.
+     *
      * @return array|false An array containing the matched files or directories, or false on failure.
      */
     public function glob($pattern, $flags = 0)
@@ -333,6 +357,7 @@ class Filesystem
      * Returns an array of files in the specified directory.
      *
      * @param string $directory The directory path.
+     *
      * @return array An array of file paths.
      */
     public function files($directory)
@@ -344,6 +369,7 @@ class Filesystem
      * Returns an array of all files in the specified directory.
      *
      * @param string $directory The directory path.
+     *
      * @return array The array of file paths.
      */
     public function allFiles($directory)
@@ -361,6 +387,7 @@ class Filesystem
      * Returns an array of directories within the specified directory.
      *
      * @param string $directory The directory path.
+     *
      * @return array An array of directories.
      */
     public function directories($directory)
@@ -372,6 +399,7 @@ class Filesystem
      * Returns an array of all directories within the specified directory.
      *
      * @param string $directory The directory path.
+     *
      * @return array An array of directory paths.
      */
     public function allDirectories($directory)
@@ -390,6 +418,7 @@ class Filesystem
      *
      * @param string  $directory The directory path to create.
      * @param integer $mode      The permissions mode for the directory (default: 0777).
+     *
      * @return boolean Returns true on success, false on failure.
      */
     public function makeDirectoryRecursive($directory, $mode = 0777)
@@ -404,6 +433,7 @@ class Filesystem
      * @param boolean $preserve  Whether to preserve the directory itself or not.
      *                           If set to true, only the contents of the directory will be deleted.
      *                           If set to false, the directory and its contents will be deleted.
+     *
      * @return boolean Returns true on success, false on failure.
      */
     public function deleteDirectory($directory, $preserve = false)
@@ -431,6 +461,7 @@ class Filesystem
      * Cleans a directory by deleting all its contents.
      *
      * @param string $directory The path to the directory to be cleaned.
+     *
      * @return boolean True if the directory was successfully cleaned, false otherwise.
      */
     public function cleanDirectory($directory)
@@ -442,6 +473,7 @@ class Filesystem
      * Checks if a given path is a file.
      *
      * @param string $path The path to check.
+     *
      * @return boolean Returns true if the path is a file, false otherwise.
      */
     public function isFile($path)
@@ -453,6 +485,7 @@ class Filesystem
      * Checks if a given path is a directory.
      *
      * @param string $path The path to check.
+     *
      * @return boolean Returns true if the path is a directory, false otherwise.
      */
     public function isDirectory($path)
@@ -464,6 +497,7 @@ class Filesystem
      * Check if a given path is a symbolic link.
      *
      * @param string $path The path to check.
+     *
      * @return boolean Returns true if the path is a symbolic link, false otherwise.
      */
     public function isLink($path)
@@ -476,10 +510,27 @@ class Filesystem
      *
      * @param string $target The target file/directory path.
      * @param string $link   The path of the symbolic link to be created.
+     *
      * @return boolean Returns true on success, false on failure.
      */
     public function link($target, $link)
     {
         return symlink($this->basePath . '/' . $target, $this->basePath . '/' . $link);
+    }
+
+    /**
+     * Retrieves the required file at the specified path.
+     *
+     * @param string $path The path to the required file.
+     *
+     * @return mixed|false The required file if it exists, false otherwise.
+     */
+    public function getRequire($path)
+    {
+        if ($this->exists($path)) {
+            return require $this->basePath . '/' . $path;
+        }
+
+        return false;
     }
 }

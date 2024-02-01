@@ -645,4 +645,24 @@ class Collection
 
         return new static(array_merge($this->items, $values));
     }
+
+    /**
+     * Flattens the collection into a single-level array using dot notation.
+     *
+     * @return static The flattened collection.
+     */
+    public function dot():static
+    {
+        $result = [];
+
+        foreach ($this->items as $key => $value) {
+            if (is_array($value)) {
+                $result = array_merge($result, (new static($value))->dot());
+            } else {
+                $result[$key] = $value;
+            }
+        }
+
+        return new static($result);
+    }
 }
