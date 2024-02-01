@@ -120,4 +120,19 @@ class Translator
     {
         $this->translations[$locale] = $translations;
     }
+
+    /**
+     * Get the locale used by the Translator.
+     *
+     * @return string The locale used by the Translator.
+     */
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+
+    public function translate($key, array $replace = [], $locale = null)
+    {
+        return $this->get($key, $replace, $locale);
+    }
 }
