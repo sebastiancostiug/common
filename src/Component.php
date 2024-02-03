@@ -77,7 +77,7 @@ class Component
      *
      * @param string $name The property name or the event name
      *
-     * @return bool whether the named property is set
+     * @return boolean whether the named property is set
      */
     public function __isset($name)
     {
@@ -137,9 +137,9 @@ class Component
      *   (in this case, property name is case-insensitive);
      * - the class has a member variable with the specified name (when `$checkVars` is true);
      *
-     * @param string $name the property name
-     * @param bool $checkVars whether to treat member variables as properties
-     * @return bool whether the property is defined
+     * @param string  $name      the property name
+     * @param boolean $checkVars whether to treat member variables as properties
+     * @return boolean whether the property is defined
      * @see canGetProperty()
      * @see canSetProperty()
      */
@@ -157,9 +157,9 @@ class Component
      *   (in this case, property name is case-insensitive);
      * - the class has a member variable with the specified name (when `$checkVars` is true);
      *
-     * @param string $name the property name
-     * @param bool $checkVars whether to treat member variables as properties
-     * @return bool whether the property can be read
+     * @param string  $name      the property name
+     * @param boolean $checkVars whether to treat member variables as properties
+     * @return boolean whether the property can be read
      * @see canSetProperty()
      */
     public function canGetProperty($name, $checkVars = true)
@@ -176,9 +176,9 @@ class Component
      *   (in this case, property name is case-insensitive);
      * - the class has a member variable with the specified name (when `$checkVars` is true);
      *
-     * @param string $name the property name
-     * @param bool $checkVars whether to treat member variables as properties
-     * @return bool whether the property can be written
+     * @param string  $name      the property name
+     * @param boolean $checkVars whether to treat member variables as properties
+     * @return boolean whether the property can be written
      * @see canGetProperty()
      */
     public function canSetProperty($name, $checkVars = true)
@@ -192,11 +192,10 @@ class Component
      * The default implementation is a call to php function `method_exists()`.
      * You may override this method when you implemented the php magic method `__call()`.
      * @param string $name the method name
-     * @return bool whether the method is defined
+     * @return boolean whether the method is defined
      */
     public function hasMethod($name)
     {
         return method_exists($this, $name);
     }
-
 }
