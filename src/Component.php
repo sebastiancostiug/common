@@ -40,7 +40,7 @@ class Component
             try {
                 return $this->$name;
             } catch (\Exception $e) {
-                throw_when(true, 'Getting read-only property: ' . get_class($this) . '::' . $name);
+                throw new \Exception('Getting unknown property: ' . get_class($this) . '::' . $name);
             }
         }
     }
@@ -66,7 +66,7 @@ class Component
             try {
                 $this->$name = $value;
             } catch (\Exception $e) {
-                throw_when(true, 'Setting read-only property: ' . get_class($this) . '::' . $name);
+                throw new \Exception('Setting unknown property: ' . get_class($this) . '::' . $name);
             }
         }
     }
@@ -103,11 +103,16 @@ class Component
      */
     public function __unset($name)
     {
-        throw_when(!property_exists($this, $name) && !method_exists($this, 'set' . $name) && method_exists($this, 'get' . $name), 'Unsetting read-only property: ' . get_class($this) . '::' . $name);
-        throw_when(!property_exists($this, $name) && !method_exists($this, 'get' . $name), 'Unsetting unknown property: ' . get_class($this) . '::' . $name);
-
         $setter = 'set' . $name;
-        $this->$setter(null);
+        if (method_exists($this, $setter)) {
+            $this->$setter(null);
+        } elseif (property_exists($this, $name)) {
+            $this->$name = null;
+        } elseif (method_exists($this, 'get' . $name)) {
+            throw new \Exception('Unsetting read-only property: ' . get_class($this) . '::' . $name);
+        } else {
+            throw new \Exception('Unsetting unknown property: ' . get_class($this) . '::' . $name);
+        }
     }
 
     /**
@@ -123,9 +128,11 @@ class Component
      */
     public function __call($name, array $params): mixed
     {
-        throw_when(!$this->hasMethod($name), 'Calling unknown method: ' . get_class($this) . "::$name()");
+        if ($this->hasMethod($name)) {
+            return call_user_func_array([$this, $name], $params);
+        }
 
-        return call_user_func_array([$this, $name], $params);
+        throw new \Exception('Calling unknown method: ' . get_class($this) . "::$name()");
     }
 
     /**
