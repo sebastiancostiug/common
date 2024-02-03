@@ -48,10 +48,6 @@ class Component
     /**
      * Sets the value of a component property.
      *
-     * This method will check in the following order and act accordingly:
-     *
-     *  - a property defined by a setter: set the property value
-     *
      * Do not call this method directly as it is a PHP magic method that
      * will be implicitly called when executing `$component->property = $value;`.
      *
@@ -78,11 +74,6 @@ class Component
     /**
      * Checks if a property is set, i.e. defined and not null.
      *
-     * This method will check in the following order and act accordingly:
-     *
-     *  - a property defined by a setter: return whether the property is set
-     *  - return `false` for non existing properties
-     *
      * Do not call this method directly as it is a PHP magic method that
      * will be implicitly called when executing `isset($component->property)`.
      *
@@ -103,12 +94,9 @@ class Component
     /**
      * Sets a component property to be null.
      *
-     * This method will check in the following order and act accordingly:
-     *
-     *  - a property defined by a setter: set the property value to be null
-     *
      * Do not call this method directly as it is a PHP magic method that
      * will be implicitly called when executing `unset($component->property)`.
+     *
      * @param string $name The property name
      *
      * @return void
@@ -122,11 +110,12 @@ class Component
         $this->$setter(null);
     }
 
-        /**
+    /**
      * Calls the named method which is not a class method.
      *
      * Do not call this method directly as it is a PHP magic method that
      * will be implicitly called when an unknown method is being invoked.
+     *
      * @param string $name   The method name
      * @param array  $params Method parameters
      *
@@ -142,58 +131,40 @@ class Component
     /**
      * Returns a value indicating whether a property is defined.
      *
-     * A property is defined if:
-     *
-     * - the class has a getter or setter method associated with the specified name
-     *   (in this case, property name is case-insensitive);
-     * - the class has a member variable with the specified name (when `$checkVars` is true);
-     *
-     * @param string  $name      The property name
-     * @param boolean $checkVars Whether to treat member variables as properties
+     * @param string  $name              The property name
+     * @param boolean $includeProperties Whether to check class properties
      *
      * @return boolean whether the property is defined
      */
-    public function hasProperty($name, $checkVars = true)
+    public function hasProperty($name, $includeProperties = true)
     {
-        return $this->canGetProperty($name, $checkVars) || $this->canSetProperty($name, false);
+        return $this->canGetProperty($name, $includeProperties) || $this->canSetProperty($name, false);
     }
 
     /**
      * Returns a value indicating whether a property can be read.
      *
-     * A property is readable if:
-     *
-     * - the class has a getter method associated with the specified name
-     *   (in this case, property name is case-insensitive);
-     * - the class has a member variable with the specified name (when `$checkVars` is true);
-     *
-     * @param string  $name      The property name
-     * @param boolean $checkVars Whether to treat member variables as properties
+     * @param string  $name              The property name
+     * @param boolean $includeProperties Whether to check class properties
      *
      * @return boolean whether the property can be read
      */
-    public function canGetProperty($name, $checkVars = true)
+    public function canGetProperty($name, $includeProperties = true)
     {
-        return method_exists($this, 'get' . $name) || $checkVars && property_exists($this, $name);
+        return method_exists($this, 'get' . $name) || $includeProperties && property_exists($this, $name);
     }
 
     /**
      * Returns a value indicating whether a property can be set.
      *
-     * A property is writable if:
-     *
-     * - the class has a setter method associated with the specified name
-     *   (in this case, property name is case-insensitive);
-     * - the class has a member variable with the specified name (when `$checkVars` is true);
-     *
-     * @param string  $name      The property name
-     * @param boolean $checkVars Whether to treat member variables as properties
+     * @param string  $name              The property name
+     * @param boolean $includeProperties Whether to check class properties
      *
      * @return boolean whether the property can be written
      */
-    public function canSetProperty($name, $checkVars = true)
+    public function canSetProperty($name, $includeProperties = true)
     {
-        return method_exists($this, 'set' . $name) || $checkVars && property_exists($this, $name);
+        return method_exists($this, 'set' . $name) || $includeProperties && property_exists($this, $name);
     }
 
     /**
