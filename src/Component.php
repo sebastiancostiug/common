@@ -32,12 +32,17 @@ class Component
      */
     public function __get($name): mixed
     {
-        throw_when(!property_exists($this, $name) && !method_exists($this, 'get' . $name) && method_exists($this, 'set' . $name), 'Getting write-only property: ' . get_class($this) . '::' . $name);
-        throw_when(!property_exists($this, $name) && !method_exists($this, 'get' . $name), 'Getting unknown property: ' . get_class($this) . '::' . $name);
+        $getter = 'get' . ucfirst($name);
 
-        $getter = 'get' . $name;
-
-        return $this->$getter();
+        if (method_exists($this, $getter)) {
+            return $this->$getter();
+        } else {
+            try {
+                return $this->$name;
+            } catch (\Exception $e) {
+                throw_when(true, 'Getting read-only property: ' . get_class($this) . '::' . $name);
+            }
+        }
     }
 
     /**
@@ -55,13 +60,19 @@ class Component
      *
      * @return void
      */
-    public function __set($name, $value)
+    public function __set($name, mixed $value)
     {
-        throw_when(!property_exists($this, $name) && !method_exists($this, 'set' . $name) && method_exists($this, 'get' . $name), 'Setting read-only property: ' . get_class($this) . '::' . $name);
-        throw_when(!property_exists($this, $name) && !method_exists($this, 'set' . $name), 'Setting unknown property: ' . get_class($this) . '::' . $name);
+        $setter = 'set' . ucfirst($name);
 
-        $setter = 'set' . $name;
-        $this->$setter($value);
+        if (method_exists($this, $setter)) {
+            $this->$setter($value);
+        } else {
+            try {
+                $this->$name = $value;
+            } catch (\Exception $e) {
+                throw_when(true, 'Setting read-only property: ' . get_class($this) . '::' . $name);
+            }
+        }
     }
 
     /**
@@ -121,7 +132,7 @@ class Component
      *
      * @return mixed the method return value
      */
-    public function __call($name, $params)
+    public function __call($name, array $params): mixed
     {
         throw_when(!$this->hasMethod($name), 'Calling unknown method: ' . get_class($this) . "::$name()");
 
@@ -137,11 +148,10 @@ class Component
      *   (in this case, property name is case-insensitive);
      * - the class has a member variable with the specified name (when `$checkVars` is true);
      *
-     * @param string  $name      the property name
-     * @param boolean $checkVars whether to treat member variables as properties
+     * @param string  $name      The property name
+     * @param boolean $checkVars Whether to treat member variables as properties
+     *
      * @return boolean whether the property is defined
-     * @see canGetProperty()
-     * @see canSetProperty()
      */
     public function hasProperty($name, $checkVars = true)
     {
@@ -157,10 +167,10 @@ class Component
      *   (in this case, property name is case-insensitive);
      * - the class has a member variable with the specified name (when `$checkVars` is true);
      *
-     * @param string  $name      the property name
-     * @param boolean $checkVars whether to treat member variables as properties
+     * @param string  $name      The property name
+     * @param boolean $checkVars Whether to treat member variables as properties
+     *
      * @return boolean whether the property can be read
-     * @see canSetProperty()
      */
     public function canGetProperty($name, $checkVars = true)
     {
@@ -176,10 +186,10 @@ class Component
      *   (in this case, property name is case-insensitive);
      * - the class has a member variable with the specified name (when `$checkVars` is true);
      *
-     * @param string  $name      the property name
-     * @param boolean $checkVars whether to treat member variables as properties
+     * @param string  $name      The property name
+     * @param boolean $checkVars Whether to treat member variables as properties
+     *
      * @return boolean whether the property can be written
-     * @see canGetProperty()
      */
     public function canSetProperty($name, $checkVars = true)
     {
@@ -191,7 +201,9 @@ class Component
      *
      * The default implementation is a call to php function `method_exists()`.
      * You may override this method when you implemented the php magic method `__call()`.
-     * @param string $name the method name
+     *
+     * @param string $name The method name
+     *
      * @return boolean whether the method is defined
      */
     public function hasMethod($name)
