@@ -1,7 +1,7 @@
 <?php
 /**
  *
- * @package     slim-api-skeleton
+ * @package     Common
  *
  * @subpackage  Translator
  *
@@ -9,8 +9,7 @@
  * @copyright   2019-2024 Sebastian Costiug
  * @license     https://opensource.org/licenses/BSD-3-Clause
  *
- * @category    slim-api-skeleton
- * @see
+ * @category    common classes
  *
  * @since       2024-02-01
  *
