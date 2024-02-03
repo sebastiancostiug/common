@@ -22,4 +22,11 @@ I recomend forking it because it's purpose is for personal use and I will only m
 
 ---
 
-It contains a Singleton trait and a Collectioon class similar to Laravel collection
+It contains
+
+Collection Class similar to Laravel's
+Component Class inspired by Yii2
+Fileloader Class simplified from Laravel's
+Filesystem Class simplified from Laravel's
+Singleton Trait
+Translator Class simplified from Laravel's
