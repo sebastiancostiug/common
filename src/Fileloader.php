@@ -112,7 +112,7 @@ class Fileloader
 
         $lines = new Collection($lines);
 
-        return $lines->dot()->toArray();
+        return $lines->dot();
     }
 
     /**
@@ -171,8 +171,6 @@ class Fileloader
                 $lines = array_replace_recursive($lines, $this->loadPath($hint, $locale, $group));
             }
         }
-
-        $lines = array_replace_recursive($lines, $this->loadPath("{$this->path}/packages/{$namespace}", $locale, $group));
 
         return $lines;
     }

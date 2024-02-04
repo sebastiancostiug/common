@@ -44,15 +44,18 @@ class Translator
     /**
      * Translator constructor.
      *
-     * @param string $locale   The locale to use for translation.
-     * @param string $fallback The fallback locale to use if the translation for the specified locale is not available.
+     * @param Fileloader $translations An associative array of translations.
+     * @param string     $locale       The locale to use for translation.
+     * @param string     $fallback     The fallback locale to use if the translation for the specified locale is not available.
      *
      * @return void
      */
-    public function __construct($locale, $fallback)
+    public function __construct(Fileloader $translations, $locale, $fallback = 'en')
     {
-        $this->locale = $locale;
-        $this->fallback = $fallback;
+        $this->translations[$locale]   = $translations->load($locale, 'validation', 'language');
+        $this->translations[$fallback] = $translations->load($fallback, 'validation', 'language');
+        $this->locale                  = $locale;
+        $this->fallback                = $fallback;
     }
 
     /**
@@ -101,7 +104,7 @@ class Translator
     protected function makeReplacements($line, array $replace)
     {
         foreach ($replace as $key => $value) {
-            $line = str_replace(':' . $key, $value, $line);
+            $line = str_replace(':' . $key, $value, $line ?? '');
         }
 
         return $line;

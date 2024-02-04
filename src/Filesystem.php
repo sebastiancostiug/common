@@ -36,7 +36,7 @@ class Filesystem
      */
     public function __construct()
     {
-        $this->basePath = base_path();
+        $this->basePath = app_path();
     }
 
     /**
@@ -48,7 +48,7 @@ class Filesystem
      */
     public function exists($path)
     {
-        return file_exists($this->basePath . '/' . $path);
+        return file_exists($this->basePath . $path);
     }
 
     /**
@@ -60,7 +60,7 @@ class Filesystem
      */
     public function get($path)
     {
-        return file_get_contents($this->basePath . '/' . $path);
+        return file_get_contents($this->basePath . $path);
     }
 
     /**
@@ -73,7 +73,7 @@ class Filesystem
      */
     public function put($path, $contents)
     {
-        return file_put_contents($this->basePath . '/' . $path, $contents);
+        return file_put_contents($this->basePath . $path, $contents);
     }
 
     /**
@@ -126,7 +126,7 @@ class Filesystem
      */
     public function chmod($path, $mode = 0777)
     {
-        return chmod($this->basePath . '/' . $path, $mode);
+        return chmod($this->basePath . $path, $mode);
     }
 
     /**
@@ -139,7 +139,7 @@ class Filesystem
      */
     public function chown($path, $user)
     {
-        return chown($this->basePath . '/' . $path, $user);
+        return chown($this->basePath . $path, $user);
     }
 
     /**
@@ -152,7 +152,7 @@ class Filesystem
      */
     public function chgrp($path, $group)
     {
-        return chgrp($this->basePath . '/' . $path, $group);
+        return chgrp($this->basePath . $path, $group);
     }
 
     /**
@@ -165,7 +165,7 @@ class Filesystem
      */
     public function copy($path, $target)
     {
-        return copy($this->basePath . '/' . $path, $this->basePath . '/' . $target);
+        return copy($this->basePath . $path, $this->basePath . $target);
     }
 
     /**
@@ -178,7 +178,7 @@ class Filesystem
      */
     public function move($path, $target)
     {
-        return rename($this->basePath . '/' . $path, $this->basePath . '/' . $target);
+        return rename($this->basePath . $path, $this->basePath . $target);
     }
 
         /**
@@ -190,7 +190,7 @@ class Filesystem
      */
     public function delete($path)
     {
-        return unlink($this->basePath . '/' . $path);
+        return unlink($this->basePath . $path);
     }
 
     /**
@@ -204,7 +204,7 @@ class Filesystem
      */
     public function makeDirectory($path, $mode = 0777, $recursive = false)
     {
-        return mkdir($this->basePath . '/' . $path, $mode, $recursive);
+        return mkdir($this->basePath . $path, $mode, $recursive);
     }
 
     /**
@@ -216,7 +216,7 @@ class Filesystem
      */
     public function removeDirectory($path)
     {
-        return rmdir($this->basePath . '/' . $path);
+        return rmdir($this->basePath . $path);
     }
 
     /**
@@ -228,7 +228,7 @@ class Filesystem
      */
     public function size($path)
     {
-        return filesize($this->basePath . '/' . $path);
+        return filesize($this->basePath . $path);
     }
 
     /**
@@ -240,7 +240,7 @@ class Filesystem
      */
     public function lastModified($path)
     {
-        return filemtime($this->basePath . '/' . $path);
+        return filemtime($this->basePath . $path);
     }
 
     /**
@@ -252,7 +252,7 @@ class Filesystem
      */
     public function type($path)
     {
-        return filetype($this->basePath . '/' . $path);
+        return filetype($this->basePath . $path);
     }
 
     /**
@@ -264,7 +264,7 @@ class Filesystem
      */
     public function mimeType($path)
     {
-        return mime_content_type($this->basePath . '/' . $path);
+        return mime_content_type($this->basePath . $path);
     }
 
     /**
@@ -276,7 +276,7 @@ class Filesystem
      */
     public function extension($path)
     {
-        return pathinfo($this->basePath . '/' . $path, PATHINFO_EXTENSION);
+        return pathinfo($this->basePath . $path, PATHINFO_EXTENSION);
     }
 
     /**
@@ -288,7 +288,7 @@ class Filesystem
      */
     public function name($path)
     {
-        return pathinfo($this->basePath . '/' . $path, PATHINFO_FILENAME);
+        return pathinfo($this->basePath . $path, PATHINFO_FILENAME);
     }
 
     /**
@@ -300,7 +300,7 @@ class Filesystem
      */
     public function basename($path)
     {
-        return pathinfo($this->basePath . '/' . $path, PATHINFO_BASENAME);
+        return pathinfo($this->basePath . $path, PATHINFO_BASENAME);
     }
 
     /**
@@ -312,7 +312,7 @@ class Filesystem
      */
     public function isReadable($path)
     {
-        return is_readable($this->basePath . '/' . $path);
+        return is_readable($this->basePath . $path);
     }
 
     /**
@@ -324,7 +324,7 @@ class Filesystem
      */
     public function isWritable($path)
     {
-        return is_writable($this->basePath . '/' . $path);
+        return is_writable($this->basePath . $path);
     }
 
     /**
@@ -336,7 +336,7 @@ class Filesystem
      */
     public function isExecutable($path)
     {
-        return is_executable($this->basePath . '/' . $path);
+        return is_executable($this->basePath . $path);
     }
 
     /**
@@ -349,7 +349,7 @@ class Filesystem
      */
     public function glob($pattern, $flags = 0)
     {
-        return glob($this->basePath . '/' . $pattern, $flags);
+        return glob($this->basePath . $pattern, $flags);
     }
 
     /**
@@ -422,7 +422,7 @@ class Filesystem
      */
     public function makeDirectoryRecursive($directory, $mode = 0777)
     {
-        return mkdir($this->basePath . '/' . $directory, $mode, true);
+        return mkdir($this->basePath . $directory, $mode, true);
     }
 
     /**
@@ -477,7 +477,7 @@ class Filesystem
      */
     public function isFile($path)
     {
-        return is_file($this->basePath . '/' . $path);
+        return is_file($this->basePath . $path);
     }
 
     /**
@@ -489,7 +489,7 @@ class Filesystem
      */
     public function isDirectory($path)
     {
-        return is_dir($this->basePath . '/' . $path);
+        return is_dir($this->basePath . $path);
     }
 
     /**
@@ -501,7 +501,7 @@ class Filesystem
      */
     public function isLink($path)
     {
-        return is_link($this->basePath . '/' . $path);
+        return is_link($this->basePath . $path);
     }
 
     /**
@@ -514,7 +514,7 @@ class Filesystem
      */
     public function link($target, $link)
     {
-        return symlink($this->basePath . '/' . $target, $this->basePath . '/' . $link);
+        return symlink($this->basePath . $target, $this->basePath . $link);
     }
 
     /**
@@ -527,7 +527,7 @@ class Filesystem
     public function getRequire($path)
     {
         if ($this->exists($path)) {
-            return require $this->basePath . '/' . $path;
+            return require $this->basePath . $path;
         }
 
         return false;

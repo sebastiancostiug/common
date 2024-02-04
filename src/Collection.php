@@ -649,20 +649,20 @@ class Collection
     /**
      * Flattens the collection into a single-level array using dot notation.
      *
-     * @return static The flattened collection.
+     * @return array The flattened collection.
      */
-    public function dot():static
+    public function dot():array
     {
         $result = [];
 
         foreach ($this->items as $key => $value) {
-            if (is_array($value)) {
+            if (is_array($value) && ! empty($value)) {
                 $result = array_merge($result, (new static($value))->dot());
             } else {
                 $result[$key] = $value;
             }
         }
 
-        return new static($result);
+        return $result;
     }
 }
