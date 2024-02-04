@@ -130,6 +130,15 @@ class Translator
         return $this->locale;
     }
 
+    /**
+     * Translates a given key into the specified locale.
+     *
+     * @param string      $key     The key to be translated.
+     * @param array       $replace An array of values to replace placeholders in the translation.
+     * @param string|null $locale  The locale to translate the key into. If null, the default locale will be used.
+     *
+     * @return string The translated string.
+     */
     public function translate($key, array $replace = [], $locale = null)
     {
         return $this->get($key, $replace, $locale);
