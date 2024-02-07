@@ -100,7 +100,6 @@ class Fileloader
     public function load($locale, $group, $namespace = null)
     {
         $lines = [];
-
         if (is_null($namespace) || $namespace === '*') {
             $lines = $this->loadPath($this->path, $locale, $group);
         } elseif (str_contains($namespace, '::')) {
