@@ -50,10 +50,10 @@ class Translator
      *
      * @return void
      */
-    public function __construct(Fileloader $translations, $locale, $fallback = 'en')
+    public function __construct(Fileloader $translations, $file, $locale, $fallback = 'en')
     {
-        $this->translations[$locale]   = $translations->load($locale, 'validation', 'language');
-        $this->translations[$fallback] = $translations->load($fallback, 'validation', 'language');
+        $this->translations[$locale]   = $translations->load($locale, $file, 'language');
+        $this->translations[$fallback] = $translations->load($fallback, $file, 'language');
         $this->locale                  = $locale;
         $this->fallback                = $fallback;
     }

@@ -110,9 +110,7 @@ class Fileloader
             $lines = $this->loadNamespaceOverrides($locale, $group, $namespace);
         }
 
-        $lines = new Collection($lines);
-
-        return $lines->dot();
+        return array_dot($lines);
     }
 
     /**
