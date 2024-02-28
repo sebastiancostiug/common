@@ -50,16 +50,6 @@ trait Singleton
     }
 
     /**
-     * Prevents the Singleton class from being cloned.
-     *
-     * @return void
-     */
-    private function __clone()
-    {
-        trigger_error('Class singleton ' . get_class($this) . ' cant be cloned.');
-    }
-
-    /**
      * Clears the instance of the Singleton class.
      *
      * @return void
@@ -70,6 +60,16 @@ trait Singleton
     }
 
     /**
+     * Prevents the Singleton class from being cloned.
+     *
+     * @return void
+     */
+    private function __clone()
+    {
+        trigger_error('Class singleton ' . get_class($this) . ' cant be cloned.');
+    }
+
+    /**
      * The __wakeup() method is declared final to prevent any child classes from overriding it.
      * It triggers an error message when an attempt is made to serialize the singleton object.
      *
@@ -77,6 +77,6 @@ trait Singleton
      */
     final public function __wakeup(): void
     {
-        trigger_error('Classe singleton ' . get_class($this) . ' cant be serialized.');
+        trigger_error('Class singleton ' . get_class($this) . ' cant be serialized.');
     }
 }
