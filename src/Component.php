@@ -19,6 +19,8 @@ namespace common;
 
 /**
  * Component class
+ *
+ * Implements custom magic methods __get, __set, __isset, __unset, __call to allow dynamically set class properties.
  */
 class Component
 {
