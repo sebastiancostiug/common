@@ -39,12 +39,14 @@ trait Singleton
     /**
      * Get the instance of the class.
      *
+     * @param mixed $params The parameters to pass to the constructor.
+     *
      * @return object The instance of the class.
      */
-    final public static function getInstance()
+    final public static function getInstance(mixed $params = null)
     {
         if (static::$instance === null) {
-            static::$instance = new static();
+            static::$instance = new static($params);
         }
         return static::$instance;
     }

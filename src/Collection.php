@@ -446,6 +446,21 @@ class Collection
     }
 
     /**
+     * Trims the collection by removing leading and trailing whitespace from each element.
+     *
+     * @return self The trimmed collection.
+     */
+    public function trim()
+    {
+        return new static(array_map(function ($item) {
+            if (is_array($item)) {
+                return $this->trim($item);
+            }
+            return trim($item);
+        }, $this->items));
+    }
+
+    /**
      * Get an iterator for the items.
      *
      * @return \ArrayIterator
