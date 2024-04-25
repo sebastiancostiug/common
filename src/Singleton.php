@@ -32,18 +32,20 @@ trait Singleton
     /**
      * Singleton constructor.
      *
+     * @param array $params The parameters to pass to the constructor.
+     *
      * @return mixed
      */
-    abstract protected function __construct();
+    abstract protected function __construct(array $params = []);
 
     /**
      * Get the instance of the class.
      *
-     * @param mixed $params The parameters to pass to the constructor.
+     * @param array $params The parameters to pass to the constructor.
      *
      * @return object The instance of the class.
      */
-    final public static function getInstance(mixed $params = null)
+    final public static function getInstance(array $params = [])
     {
         if (static::$instance === null) {
             static::$instance = new static($params);
