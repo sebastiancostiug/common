@@ -104,7 +104,7 @@ class Translator
     protected function makeReplacements($line, array $replace)
     {
         foreach ($replace as $key => $value) {
-            $line = str_replace(':' . $key, $value, $line ?? '');
+            $line = str_replace('{{' . $key . '}}', $value, $line ?? '');
         }
 
         return $line;
@@ -144,6 +144,34 @@ class Translator
      */
     public function translate($key, array $replace = [], $locale = null)
     {
-        return $this->get($key, $replace, $locale);
+        return $this->capitalize($this->get($key, $replace, $locale));
+    }
+
+    /**
+     * Capitalizes the given text.
+     *
+     * @param string $text The text to be capitalized.
+     *
+     * @return string The capitalized text.
+     */
+    private function capitalize($text)
+    {
+    // Capitalize the first letter of each sentence
+    $text = preg_replace_callback('/([.!?])\s*(\w)/', function ($matches) {
+        return strtoupper($matches[1] . ' ' . $matches[2]);
+    }, ucfirst(strtolower($text)));
+
+    // Capitalize proper nouns (assuming they are always followed by a space or end of line)
+    $properNouns = [
+        'com', 'net', 'org', 'gov', 'edu', 'io',
+        'php', 'html', 'css', 'js', 'json', 'xml', 'yaml', 'yml', 'sql', 'php', 'java', 'c', 'cpp', 'cs', 'py', 'rb', 'go', 'kt', 'ts', 'sh', 'bash', 'bat', 'cmd',
+    ];
+    foreach ($properNouns as $noun) {
+        $text = preg_replace_callback('/\b' . $noun . '\b/', function ($matches) {
+            return ucfirst($matches[0]);
+        }, $text);
+    }
+
+    return $text;
     }
 }
