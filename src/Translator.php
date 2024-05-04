@@ -77,6 +77,10 @@ class Translator
             $line = $this->getLine($key, $this->fallback);
         }
 
+        if ($line === null) {
+            return $key;
+        }
+
         return $this->makeReplacements($line, $replace);
     }
 
